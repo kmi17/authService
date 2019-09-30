@@ -1,14 +1,9 @@
 package com.training.api.authenticate;
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
-
-import javax.net.ssl.HttpsURLConnection;
 
 public class Authenticator {
 	public static String data_api = "http://localhost:8081/account/customer";

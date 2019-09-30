@@ -4,18 +4,17 @@ import java.io.IOException;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/token")
+@RequestMapping("/account")
 public class TokenAPI {
 	JWTUtil jwtUtil = new JWTMockUtil();
-	// JWTUtil jwtUtil = new JWTHelper();
-	
-	@PostMapping(consumes = "application/json")
+	@PostMapping("/token")
 	public ResponseEntity<?> getToken(@RequestBody TokenRequestData tokenRequestData) throws IOException {
 		
 		String username = tokenRequestData.getUsername();
@@ -26,12 +25,11 @@ public class TokenAPI {
 				&& Authenticator.checkPassword(username, password)) {
 			Token token = jwtUtil.createToken(scopes);
 			ResponseEntity<?> response = ResponseEntity.ok(token);
+			
 			return response;			
 		}
 		// bad request
 		return (ResponseEntity<?>) ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 		
-	}
-	
-	
+	}	
 }
