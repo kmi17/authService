@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/account")
 public class TokenAPI {
-	JWTUtil jwtUtil = new JWTMockUtil();
+	JWTUtil jwtUtil = new JWTHelper();
 	@PostMapping("/token")
 	public ResponseEntity<?> getToken(@RequestBody TokenRequestData tokenRequestData) throws IOException {
 		
