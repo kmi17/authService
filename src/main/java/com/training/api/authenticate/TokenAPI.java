@@ -1,5 +1,7 @@
  package com.training.api.authenticate;
 
+import java.io.IOException;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,21 +16,20 @@ public class TokenAPI {
 	// JWTUtil jwtUtil = new JWTHelper();
 	
 	@PostMapping(consumes = "application/json")
-	public String getToken(@RequestBody TokenRequestData tokenRequestData) {
+	public ResponseEntity<?> getToken(@RequestBody TokenRequestData tokenRequestData) throws IOException {
 		
 		String username = tokenRequestData.getUsername();
 		String password = tokenRequestData.getPassword();
 		String scopes = tokenRequestData.getScopes();
-		System.out.println(scopes);
 		if (username != null && username.length() > 0 
 				&& password != null && password.length() > 0 
 				&& Authenticator.checkPassword(username, password)) {
 			Token token = jwtUtil.createToken(scopes);
 			ResponseEntity<?> response = ResponseEntity.ok(token);
-			return "hi you are authorized";			
+			return response;			
 		}
 		// bad request
-		return "not authorized";//(ResponseEntity<?>) ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+		return (ResponseEntity<?>) ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 		
 	}
 	
