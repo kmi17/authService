@@ -11,7 +11,7 @@ public class Authenticator {
 	// requestor method makes the method
 	
 	public static boolean checkUser(String username) throws IOException {
-		Get(data_api);
+		//Get(data_api);
 		if( (username != null && username.length() > 0) &&
 			( username.equalsIgnoreCase("john") 
 		    || username.equalsIgnoreCase("susan"))) {
