@@ -5,10 +5,11 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import org.springframework.web.client.RestTemplate;
+
 public class Authenticator {
 	public static String data_api = "http://localhost:8081/account/customer";
-	
-	// requestor method makes the method
+	RestTemplate rest = new RestTemplate();
 	
 	public static boolean checkUser(String username) throws IOException {
 		//Get(data_api);
